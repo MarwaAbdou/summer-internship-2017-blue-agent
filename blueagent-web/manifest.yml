@@ -1,7 +1,7 @@
 applications:
 - name: BlueAgentWeb
   path: target/blueagent-web.war
-  host: in-blueagent
+  host: internship-blueagent
   env:    
     IBM_JVM_LICENSE: L-PMAA-A3Z8P2
     IBM_LIBERTY_LICENSE: L-SWIS-AEPPZP
