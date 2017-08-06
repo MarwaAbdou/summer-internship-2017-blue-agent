@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 @Path("user")
 public class UserResource {
 
-  @GET @Path("me") 
+  @GET @Path("me")  
   @Produces(MediaType.APPLICATION_JSON) 
   public Response getUser(@Context HttpServletRequest req) {
 	  JsonObject json = new JsonObject();
