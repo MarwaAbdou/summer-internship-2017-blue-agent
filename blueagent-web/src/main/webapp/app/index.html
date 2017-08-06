@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" style="padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:0px;">
+<img src="resources/logo_4(2).png"></img>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="resources/logo.png">
+    <title>
+        Blue Agent
+    </title>
+    <!-- <link rel="stylesheet" href="../.tmp/styles/index.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+
+<body ng-controller="AppController as AppView">
+
+    <div class="chat-container">
+        <simple-chat
+            messages="AppView.messages"
+            local-user="AppView.you"
+            send-function="AppView.sendMessage"
+            send-button-text="Send"
+            show-user-avatar="true"
+            show-composer="true"
+            composer-placeholder-text="Write your message here"
+            style="position: relative;"
+        ></simple-chat>
+    </div>
+
+	 <!-- Dependencies -->
+    <script src="resources/angular/angular.js"></script>
+    <script src="resources/moment/moment.js"></script>
+    <script src="resources/moment/locale/fr.js"></script>
+    <!-- <script src="../.tmp/scripts/angular-simple-chat.js"></script>
+    <script src="../.tmp/scripts/templates.js"></script> -->
+    <script src="app.js"></script>
+    
+    <!--<script src="../bower_components/angular/angular.js"></script> -->
+    <script src="resources/moment/moment.js"></script>
+    <!-- <script src="../bower_components/angular-moment/angular-moment.js"></script> -->
+
+    <!-- Simple Chat -->
+    <link rel="stylesheet" href="css/angular-simple-chat.min.css">
+    <script src="javascript/angular-simple-chat.min.js"></script>
+
+</body>
+
+</html>
