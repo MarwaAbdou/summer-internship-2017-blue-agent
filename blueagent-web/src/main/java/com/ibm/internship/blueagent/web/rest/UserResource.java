@@ -32,7 +32,7 @@ public class UserResource {
   public Response getConversation(@QueryParam("text")String text) {
   
 	  Conversation conv =new Conversation();
-	  Response object = (request(). Response.status(Response.Status.OK)).accept(MediaType.APPLICATION_JSON_TYPE).entity(conv.CheckChat(text)).build();
+	  Response object =Response.status(Response.Status.OK).entity(conv.CheckChat(text)).build();
 	  return object;
 	 // return Response.status(Response.Status.OK).entity(conv.CheckChat(text)).build();
 }
