@@ -11,7 +11,7 @@ public class Conversation {
 		
 		//setting conversation environment.
 		
-		ConversationService service = new ConversationService("7/25/2017");
+		ConversationService service = new ConversationService("2017-07-25");
 		service.setEndPoint("https://gateway.watsonplatform.net/conversation/api");
 		service.setUsernameAndPassword("b70cdcad-91cd-4a6a-8089-98b24ce6d053", "gNL1hmi5CWTF");
 		

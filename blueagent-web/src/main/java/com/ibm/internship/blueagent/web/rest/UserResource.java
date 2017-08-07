@@ -12,11 +12,11 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonObject;
 
 
-@Path("user")
+@Path("services")
 public class UserResource {
 
 	
-  @GET @Path("{query}") 
+  @GET @Path("discovery") 
   @Produces(MediaType.APPLICATION_JSON) 
   public Response getQuery(@QueryParam ("query")String query/*@Context HttpServletRequest req*/ ) {
 	 Query qu =new Query();
@@ -27,12 +27,12 @@ public class UserResource {
 	  return Response.status(Response.Status.OK).entity(qu.findQuery(query)).build();
   }
 
-  @GET @Path("{text}")
+  @GET @Path("conversation")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getConversation(@QueryParam("text")String text) {
   
 	  Conversation conv =new Conversation();
-	  Response object =Response.status(Response.Status.OK).entity(conv.CheckChat(text)).build();
+	  Response object = Response.status(Response.Status.OK).entity(conv.CheckChat(text)).build();
 	  return object;
 	 // return Response.status(Response.Status.OK).entity(conv.CheckChat(text)).build();
 }

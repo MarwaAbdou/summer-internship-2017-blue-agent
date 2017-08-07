@@ -19,7 +19,7 @@ import com.ibm.watson.developer_cloud.discovery.v1.model.query.QueryResponse;
 
 public class Query {
 
-	public Response findQuery(String query) {
+	public List<Document> findQuery(String query) {
 		
 		//setting the environment Scope
 		Discovery discovery = new Discovery("2017-07-19");
@@ -36,18 +36,18 @@ public class Query {
 		  queryBuilder.query("text:"+query);
 		  QueryResponse queryResponse = discovery.query(queryBuilder.build()).execute();
 		
-		  System.out.println("your output is"+queryResponse.getResults().get(0).get("id"));
+
+		System.out.println("your output is"+queryResponse.getResults().get(0).get("id"));
 		  
-//		  List<Document> docs = new ArrayList<Document>();
-//		  for (Map<String, Object> disDoc : queryResponse.getResults()) {
-//			Document doc = new Document();
-//			doc.setBody(disDoc.get("id").toString());
-//			docs.add(doc);
-	//	}
-		 
-		  //List<documents> result=new ArrayList<documents>();
+		  List<Document> docs = new ArrayList<Document>();
+		  for (Map<String, Object> disDoc : queryResponse.getResults()) {
+			Document doc = new Document();
+			doc.setBody(disDoc.get("id").toString());
+			docs.add(doc);
+		}
 		
-		return queryResponse;
+		return docs;
+		
 	
 	}
 }
