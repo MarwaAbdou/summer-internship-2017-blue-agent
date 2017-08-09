@@ -1,5 +1,5 @@
 package com.ibm.internship.blueagent.web.rest;
-import java.lang.*;
+
 public class Document {
 	
 	private String body;

@@ -1,16 +1,8 @@
 package com.ibm.internship.blueagent.web.rest;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.lang.*;
-import java.util.*;
-import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.ibm.watson.developer_cloud.discovery.v1.Discovery;
 import com.ibm.watson.developer_cloud.discovery.v1.model.query.QueryRequest;
@@ -19,7 +11,7 @@ import com.ibm.watson.developer_cloud.discovery.v1.model.query.QueryResponse;
 
 public class Query {
 
-	public List<Document> findQuery(String query) {
+	public  List<Document> findQuery(String query) {
 		
 		//setting the environment Scope
 		Discovery discovery = new Discovery("2017-07-19");
@@ -36,18 +28,17 @@ public class Query {
 		  queryBuilder.query("text:"+query);
 		  QueryResponse queryResponse = discovery.query(queryBuilder.build()).execute();
 		
-
-		System.out.println("your output is"+queryResponse.getResults().get(0).get("id"));
+		  System.out.println("your output is"+queryResponse.getResults().get(0).get("id"));
 		  
-		  List<Document> docs = new ArrayList<Document>();
-		  for (Map<String, Object> disDoc : queryResponse.getResults()) {
+		  List<Document> docsList = new ArrayList<Document>();
+		  for (Map<String, Object> discoveryDocs : queryResponse.getResults()) {
 			Document doc = new Document();
-			doc.setBody(disDoc.get("id").toString());
-			docs.add(doc);
+			doc.setBody(discoveryDocs.get("id").toString());
+			docsList.add(doc);
+			
 		}
-		
-		return docs;
-		
+		 
+		return docsList ;
 	
 	}
 }
