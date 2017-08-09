@@ -25,6 +25,9 @@ public class Query {
 		
 		  //retrieve document
 		  QueryRequest.Builder queryBuilder = new QueryRequest.Builder(environmentId, collectionId);
+		  List fields = new ArrayList<String>();
+		  fields.add("extracted_metadata.title");
+		  queryBuilder.returnFields(fields);
 		  queryBuilder.query("text:"+query);
 		  QueryResponse queryResponse = discovery.query(queryBuilder.build()).execute();
 		
