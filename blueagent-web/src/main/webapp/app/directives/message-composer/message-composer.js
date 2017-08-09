@@ -18,7 +18,6 @@ function messageComposer() {
     function link(scope, element, attrs, controllers) {
         var simpleChatCtrl = controllers[0],
             messageComposerCtrl = controllers[1];
-        console.debug("TTTTTTTTTTTTTTTTT");
 
         messageComposerCtrl.localUser = simpleChatCtrl.localUser;
         messageComposerCtrl.sendFunction = simpleChatCtrl.sendFunction;
@@ -31,12 +30,10 @@ function messageComposer() {
 }
 
 /* @ngInject */
-function messageComposerController($scope) { 
+function messageComposerController($scope) {
     var that = this,
-        resetLiveLastMessageReference = false, 
+        resetLiveLastMessageReference = false,
         _sendFx = function() {
-    	console.debug("##################");
-    	console.debug(that.rawmessage);
             if (!angular.isDefined(that.rawmessage)) {
                 return;
             }
@@ -87,8 +84,6 @@ function messageComposerController($scope) {
                 that.rawmessage = '';
             }
         };
-       
-        
     this._send = function() {
         if (this.options.liveMode) {
             resetLiveLastMessageReference = true;
