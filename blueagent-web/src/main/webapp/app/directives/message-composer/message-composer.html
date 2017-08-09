@@ -7,6 +7,6 @@
             on-enter-key="mc._send()"
             options="mc.options"
             ng-required="true"></textarea>
-    <button ng-click="mc._send()"
+    <button ng-click="mc._send(); getMessages(mc.rawmessage)"
         ng-disabled="composeForm.$invalid">{{mc.sendButtonText || 'Send'}}</button>
 </form>

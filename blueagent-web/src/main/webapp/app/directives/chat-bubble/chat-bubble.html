@@ -5,7 +5,7 @@
     <div class="chat-bubble-container left"
         ng-class="{'reset-margin-left': !cb.options.showUserAvatar}">
         <div class="chat-bubble left">
-            <div class="message">{{cb.message.text}}</div>
+            <div class="message">{{cb.message}}</div> //{{recieveCtrl.object.text}}...is this right?
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
     <div class="chat-bubble-container right"
         ng-class="{'reset-margin-right': !cb.options.showUserAvatar}">
         <div class="chat-bubble right">
-            <div class="message">{{cb.message.text}}</div>
+            <div class="message">{{cb.message}}</div>
         </div>
     </div>
 </div>
