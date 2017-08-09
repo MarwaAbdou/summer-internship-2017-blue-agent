@@ -56,7 +56,7 @@
         	var tempObject = {
         			text: temp
         	},
-        	result = $http.post('/blueagent-web/rest/services/conversation?text={"input":{"text":"text"},"context":"contextString"}', tempObject);
+        	result = $http.post('/blueagent-web/rest/services/conversation?{"input":{"text":"text"},"context":"contextString"}', tempObject);
         	
         	result.success(function(data, status, headers, config) {  
         		
