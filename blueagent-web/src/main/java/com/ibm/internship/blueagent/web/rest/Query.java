@@ -33,7 +33,7 @@ public class Query {
 		  List<Document> docsList = new ArrayList<Document>();
 		  for (Map<String, Object> discoveryDocs : queryResponse.getResults()) {
 			Document doc = new Document();
-			doc.setBody(discoveryDocs.get("id").toString());
+			doc.setBody(discoveryDocs.toString());
 			docsList.add(doc);
 			
 		}
