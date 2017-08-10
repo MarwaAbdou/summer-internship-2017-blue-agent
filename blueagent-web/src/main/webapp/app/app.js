@@ -29,7 +29,7 @@
 //           console.log(message.text);
            return message.text;
        }
-       console.log("VM: ", vm.sendMessage);
+
         vm.messages = MockMessagesService.sendMessages(vm.sendMessage);
        
 //       vm.sendMessage = function(message){
