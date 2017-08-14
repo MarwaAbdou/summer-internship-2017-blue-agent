@@ -4,16 +4,12 @@ public class Document {
 	
 	private String body;
 	
-	public Document(String body/* String ID*/) {
+	public Document(String body) {
 	
 		this.body=body;
-//		this.ID =ID;
-		
 	}
 	
 	public Document() {
-		
-		
 	}
 
 	public String getBody() {
