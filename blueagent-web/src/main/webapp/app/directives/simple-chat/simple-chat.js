@@ -15,6 +15,7 @@ function simpleChat($timeout) {
             messages: '=',
             localUser: '=',
             sendFunction: '=',
+            anotherSendFunction: '=',
             showUserAvatar: '=',
             showComposer: '=',
             showBubbleInfos: '=',

@@ -8,7 +8,7 @@
 
 	<rule>
         <from>^/(?!app|lib|release|rest).*$</from>
-        <to type="forward">/app/index.html</to>
+        <to type="forward">/app/HomePage.html</to>
     </rule>
 
 </urlrewrite>

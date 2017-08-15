@@ -6,8 +6,8 @@
     <title>
         AngularJS Simple Chat Directive - Example
     </title>
-    <link rel="stylesheet" href="app/css/angular-simple-chat.css">
-    <link rel="stylesheet" type="text/css" href="app/css/app.css">
+    <link rel="stylesheet" href="css/angular-simple-chat.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 
 <body ng-controller="AppController as AppView">
@@ -17,6 +17,7 @@
             messages="AppView.messages"
             local-user="AppView.you"
             send-function="AppView.sendMessage"
+            another-send-function="AppView.wrapperFn"
             send-button-text="Send"
             show-user-avatar="true"
             show-composer="true"
@@ -24,11 +25,11 @@
         ></simple-chat>
     </div>
 
-    <script src="app/resources/angular/angular.js"></script>
-    <script src="app/resources/moment/moment.js"></script>
-    <script src="app/resources/moment/locale/fr.js"></script>
-    <script src="app/javascript/angular-simple-chat.js"></script>
-    <script src="app/app.js"></script>
+    <script src="resources/angular/angular.js"></script>
+    <script src="resources/moment/moment.js"></script>
+    <script src="resources/moment/locale/fr.js"></script>
+    <script src="javascript/angular-simple-chat.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

@@ -21,6 +21,7 @@ function messageComposer() {
 
         messageComposerCtrl.localUser = simpleChatCtrl.localUser;
         messageComposerCtrl.sendFunction = simpleChatCtrl.sendFunction;
+        messageComposerCtrl.anotherSendFunction = simpleChatCtrl.anotherSendFunction;
         messageComposerCtrl.sendButtonText = simpleChatCtrl.sendButtonText;
         messageComposerCtrl.composerPlaceholderText = simpleChatCtrl.composerPlaceholderText;
         messageComposerCtrl.options = simpleChatCtrl.options;
@@ -56,6 +57,7 @@ function messageComposerController($scope) {
             }
             if (!resetLiveLastMessageReference) {
                 that.sendFunction(_message);
+                that.anotherSendFunction();
             }
             if (that.options.liveMode && !resetLiveLastMessageReference) {
                 if (that.messages.length === 0) {

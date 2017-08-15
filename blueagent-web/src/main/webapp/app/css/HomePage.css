@@ -1,0 +1,78 @@
+body{
+  background-color: #1c1332;
+  background-image: url(../resources/index-bg.jpg);
+}
+
+.button{
+  border:1px #333;
+  padding:10px;
+  background-color:#00b0ff;
+  -webkit-border-radius:40px;
+  -moz-border-radius:40px;
+  border-radius:40px;
+  width: 250px;
+  height: 80px;
+  color: white;
+  font-family: Calibri (Body);
+  font-weight: 300;
+  font-size: 23px;
+  box-shadow: 0 3px 10px rgba(0,137,219,.3);
+  margin-top: 20%;
+/*  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+filter: alpha(opacity=50);
+-moz-opacity: 0.5;
+-khtml-opacity: 0.5;
+opacity: 0.5; */
+}
+.button:hover {background-color: #0098ff}
+.theAboutBtn{
+  border: 1px solid;
+  border-radius: 10px/10px;
+  background: rgba(0, 0, 0, 0.5);
+  width:15vw;
+  height:7vh;
+  color: #fff;
+  font-family: 'Roboto', serif;
+  font-size: 8pt;
+  font-size: 20px;
+  margin-top: 6%;
+  font-weight: normal;
+}
+.part1{
+  color: #00b0ff;
+  font-family: 'Roboto', serif;
+  font-size: 8pt;
+  font-size: 100px;
+  font-weight: 200;
+}
+.part2{
+  color: #fff;
+  font-family: 'Roboto', serif;
+  font-size: 8pt;
+  font-size: 100px;
+  font-weight: 200;
+}
+h1{
+  text-align: center;
+  border-bottom-width: 1px;
+  border-bottom-style:groove;
+}
+
+.container{
+  text-align: center;
+  border: 1px  ;
+  border-radius: 10px/10px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  top: 50%;
+  left: 47%;
+  margin: -70px 0 0 -170px;
+}
+.temp{
+  position: relative;
+  text-align: center;
+}

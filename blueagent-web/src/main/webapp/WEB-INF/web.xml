@@ -4,7 +4,7 @@
 	version="3.0">
 
 	<welcome-file-list>
-		<welcome-file>app/index.html</welcome-file>
+		<welcome-file>app/HomePage.html</welcome-file>
 	</welcome-file-list>
 
 	<filter>
