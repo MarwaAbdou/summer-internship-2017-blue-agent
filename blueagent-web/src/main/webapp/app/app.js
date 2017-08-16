@@ -19,47 +19,55 @@
             userName: 'User'
         };
 
-       vm.messagesFromConversation = MockMessagesService.beginConversation()[0];
+       vm.messages_2 = MockMessagesService.beginConversation()[0];
        
+       setTimeout(function() {
+    	   for (var j=0 ; j<vm.messages_2.length ; j+=1){
+    		   vm.messages.push(vm.messages_2[j]);
+    	   }console.log(vm.messages);
+    	 }, 1500); 
        
        vm.context = MockMessagesService.beginConversation()[1];
+//       console.log(vm.context);
          
        vm.sendMessage = function(message) {
-    	   
-//    	   var dummyObject = {
-//   				id: 'BA' + Date.now(),
-//				text: "",
-//				userId: 'hilsqdhfods5990K226DHS01NOHoh',
-//				userName: 'Blue Agent',
-//				avatar: 'http://polyligne.be/wp-content/uploads/2014/06/Man_Avatar.gif',
-//				date: Date.now()
-//			}
            
            console.log('sendMessage');
-           var messagesTmp = vm.messagesFromConversation;
-           
-           console.log(messagesTmp);
-
-           vm.messagesFromConversation = MockMessagesService.sendMessagesToRest(message.text, vm.context[0])[0];
-           console.log(vm.messagesFromConversation);
+           //var messagesTmp = vm.messages_2;
+          
+           vm.messages_2 = MockMessagesService.sendMessagesToRest(message.text, vm.context[0])[0];
 //           console.log(messagesTmp[0]);
-           console.log("length: "+messagesTmp.length);
-           for(var i=0 ; i<messagesTmp.length ; i++){
-              	vm.messagesFromConversation.push(messagesTmp[i]);
-              }
+//           for(var i=0 ; i<messagesTmp.length ; i+=1){
+//        	   vm.messages_2.push(messagesTmp[i]);
+//           }           
+           console.log(vm.messages_2);
+           console.log("first length: "+ vm.messages_2.length);
            
-//           vm.messagesFromConversation.push(messagesTmp[0]);
-        
+           setTimeout(function() {
+        	   for (var j=0 ; j<vm.messages_2.length ; j+=1){
+        		   vm.messages.push(vm.messages_2[j]);
+        	   }console.log(vm.messages);
+        	 }, 1500); 
            
-           console.log(vm.messagesFromConversation);//send user input to REST
+           
+           
            vm.context = MockMessagesService.sendMessagesToRest(message.text, vm.context[0])[1];
 //           console.log(message);
-//           console.log(vm.messagesFromConversation);
+//           console.log(vm.messages);
 //           console.log(message.text);
          
        }
-               
+       
 
+//       vm.wrapperFn = function(){
+//    	       	   console.log("hellooooooooooo");
+//       }
+        
+//       vm.sendMessage = function(message){
+//    	   console.log('sendMessage');
+//    	   vm.messages = MockMessagesService.sendMessages(message.text);
+//       }
+//        
         $scope.results= MockMessagesService.getResults();
         
         $scope.$on('simple-chat-message-posted', function() {
