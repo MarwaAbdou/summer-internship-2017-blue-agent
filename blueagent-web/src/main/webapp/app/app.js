@@ -19,37 +19,47 @@
             userName: 'User'
         };
 
-       vm.messages = MockMessagesService.beginConversation()[0];
-
-//       console.log("messages: " + vm.messages[0]);
+       vm.messagesFromConversation = MockMessagesService.beginConversation()[0];
+       
        
        vm.context = MockMessagesService.beginConversation()[1];
-//       console.log("context: " + vm.context);
-
-//       vm.messages = MockMessagesService.sendMessages(); //to begin conversation 
-        
+         
        vm.sendMessage = function(message) {
+    	   
+//    	   var dummyObject = {
+//   				id: 'BA' + Date.now(),
+//				text: "",
+//				userId: 'hilsqdhfods5990K226DHS01NOHoh',
+//				userName: 'Blue Agent',
+//				avatar: 'http://polyligne.be/wp-content/uploads/2014/06/Man_Avatar.gif',
+//				date: Date.now()
+//			}
            
            console.log('sendMessage');
-           console.log(vm.messages);
-           vm.messages = MockMessagesService.sendMessages(message.text, vm.context)[0]; //send user input to REST
-           vm.context = MockMessagesService.sendMessages(message.text, vm.context)[1];
+           var messagesTmp = vm.messagesFromConversation;
+           
+           console.log(messagesTmp);
+
+           vm.messagesFromConversation = MockMessagesService.sendMessagesToRest(message.text, vm.context[0])[0];
+           console.log(vm.messagesFromConversation);
+//           console.log(messagesTmp[0]);
+           console.log("length: "+messagesTmp.length);
+           for(var i=0 ; i<messagesTmp.length ; i++){
+              	vm.messagesFromConversation.push(messagesTmp[i]);
+              }
+           
+//           vm.messagesFromConversation.push(messagesTmp[0]);
+        
+           
+           console.log(vm.messagesFromConversation);//send user input to REST
+           vm.context = MockMessagesService.sendMessagesToRest(message.text, vm.context[0])[1];
 //           console.log(message);
-//           console.log(vm.messages);
+//           console.log(vm.messagesFromConversation);
 //           console.log(message.text);
          
        }
-       
+               
 
-//       vm.wrapperFn = function(){
-//    	       	   console.log("hellooooooooooo");
-//       }
-        
-//       vm.sendMessage = function(message){
-//    	   console.log('sendMessage');
-//    	   vm.messages = MockMessagesService.sendMessages(message.text);
-//       }
-//        
         $scope.results= MockMessagesService.getResults();
         
         $scope.$on('simple-chat-message-posted', function() {
@@ -60,7 +70,7 @@
 
     /* @ngInject */
     function MockMessagesService($http ) {
-        this.sendMessages = sendMessages;
+        this.sendMessagesToRest = sendMessagesToRest;
         this.getResults = getResults;
         this.beginConversation = beginConversation;
    
@@ -79,7 +89,7 @@
      			alert( "failure message: " + JSON.stringify({data: data}));
          		});
         	 
-        	 console.log(results_array);
+//        	 console.log(results_array);
         	 return results_array;
         	  }
         
@@ -88,6 +98,7 @@
         	var tempObject = {
         			"input":{"text":""}
         	},
+        	arrayOfContext = [],
         	arrayOfObjects = [],
         	wantedContext,
         	result = $http.post('/blueagent-web/rest/services/conversation', tempObject);
@@ -95,7 +106,7 @@
         	result.success(function(data, status, headers, config) {  
         		
     			    	var anotherTempObject = {
-            				id: '535d625f898df4e80e2a125e',
+            				id: 'BA' + Date.now(),
             				text: data.output.text[0],
             				userId: 'hilsqdhfods5990K226DHS01NOHoh',
             				userName: 'Blue Agent',
@@ -105,21 +116,22 @@
 //    			    	console.log(data.output.text[0]);
     			    	arrayOfObjects.push(anotherTempObject);
     			    	wantedContext = data.context;
-    			    	console.log(data.context);
+    			    	arrayOfContext.push(wantedContext);
+//    			    	console.log(data.context);
 //    				console.debug(anotherTempObject);
         	});
         	result.error(function(data, status, headers, config) {
     			alert( "failure message: " + JSON.stringify({data: data}));
     		});
 //        	console.log(arrayOfObjects);
-        	console.log(arrayOfObjects);
-        	return [arrayOfObjects,wantedContext];
+//        	console.log(arrayOfObjects);
+        	return [arrayOfObjects,arrayOfContext];
         }
         
-        function sendMessages(temp, context) {
+        function sendMessagesToRest(temp, context) {
         	console.log("Tmp: ", temp);
         	var arrayOfObjects = [],
-        	        	
+        	arrayOfContext = [],        	
         	tempObject = {
         			"input":{"text":temp},
         			"context": context
@@ -133,25 +145,26 @@
         		    			
     			for(var i = 0 ; i < data.output.text.length ; i++){
     				var anotherTempObject = {
-            				id: '535d625f898df4e80e2a125e',
+    						id: 'BA' + Date.now(),
             				text: data.output.text[i],
             				userId: 'hilsqdhfods5990K226DHS01NOHoh',
             				userName: 'Blue Agent',
             				avatar: 'http://polyligne.be/wp-content/uploads/2014/06/Man_Avatar.gif',
             				date: Date.now()
             			}
-    				console.debug(anotherTempObject);
+//    				console.debug(anotherTempObject);
         			arrayOfObjects.push(anotherTempObject);
     			}
     			wantedContext = data.context;
-    			console.log(arrayOfObjects);
+    			arrayOfContext.push(wantedContext);
+//    			console.log(arrayOfObjects);
         	});
         	
         	result.error(function(data, status, headers, config) {
     			alert( "failure message: " + JSON.stringify({data: data}));
     		});
 //        	console.log(arrayOfObjects);
-        	return [arrayOfObjects,wantedContext];
+        	return [arrayOfObjects,arrayOfContext];
         	}
         }
 })();

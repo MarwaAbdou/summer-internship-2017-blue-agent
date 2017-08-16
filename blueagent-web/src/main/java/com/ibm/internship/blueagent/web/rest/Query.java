@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.discovery.v1.Discovery;
 import com.ibm.watson.developer_cloud.discovery.v1.model.query.QueryRequest;
 import com.ibm.watson.developer_cloud.discovery.v1.model.query.QueryResponse;
@@ -36,7 +39,15 @@ public class Query {
 		  List<Document> docsList = new ArrayList<Document>();
 		  for (Map<String, Object> discoveryDocs : queryResponse.getResults()) {
 			Document doc = new Document();
-			doc.setBody(discoveryDocs.toString());
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(discoveryDocs);
+			JsonParser jsonParser = new JsonParser();
+			JsonObject jsonDocument = (JsonObject) jsonParser.parse(jsonString);
+			JsonObject docMetaData = (JsonObject) jsonDocument.get("extracted_metadata");
+//			System.out.println(discoveryDocs)
+			//doc.se
+//			doc.setBody(discoveryDocs.toString());
+			doc.setTitle(docMetaData.get("title").toString());
 			docsList.add(doc);
 			
 		}

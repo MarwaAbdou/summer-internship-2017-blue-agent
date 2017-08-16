@@ -1,15 +1,15 @@
-<div ng-if="cb.localUser.userId !== cb.message.userId">ttttttttttttttttttttttttttttttttttt
+<div ng-repeat="message in messagesFromConversation">
     <img class="profile-avatar left"
-        ng-src="{{cb.message.avatar}}"
+        ng-src="{{vm.message.avatar}}"
         ng-if="cb.options.showUserAvatar"/>
     <div class="chat-bubble-container left"
         ng-class="{'reset-margin-left': !cb.options.showUserAvatar}">
         <div class="chat-bubble left">
-            <div class="message">{{cb.message.text}}</div> 
+            <div class="message">{{vm.message.text}}</div> 
         </div>
     </div>
 </div>
-<div ng-if="cb.localUser.userId === cb.message.userId">
+<div ng-repeat="message in messages">
     <img class="profile-avatar right"
         ng-src="{{cb.localUser.avatar}}"
         ng-if="cb.options.showUserAvatar"/>
