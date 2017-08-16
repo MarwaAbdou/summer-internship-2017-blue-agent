@@ -22,54 +22,6 @@ public class ConversationBrain {
     private String url = "https://gateway.watsonplatform.net/conversation/api";
     private String username = "b70cdcad-91cd-4a6a-8089-98b24ce6d053";
     private String workspaceId = "de7eb1fe-1140-4309-a2e3-c83636b1cf20";
-//	public Map<String,Object> startChat (ConversationParameter parameters) {
-//		
-//		//setting conversation environment.
-//		Map<String,Object> fetchingObjects = new  HashMap<String,Object>();
-//		String workspaceId = "de7eb1fe-1140-4309-a2e3-c83636b1cf20";
-//		ConversationService service = new ConversationService("2017-07-25");
-//		service.setEndPoint("https://gateway.watsonplatform.net/conversation/api");
-//		service.setUsernameAndPassword("b70cdcad-91cd-4a6a-8089-98b24ce6d053", "gNL1hmi5CWTF");
-//		
-//		
-//		//send message to conversation
-//		Builder wcsbuilder = new MessageRequest.Builder();
-//		wcsbuilder.context(parameters.getContext());
-//		MessageRequest newMessage = wcsbuilder.inputText("text: "+parameters.getInput().get("text").toString()).build();
-//		
-//		
-//		MessageResponse response = service.message(workspaceId, newMessage).execute();
-//		System.out.println(response.getOutput().toString());
-//						
-//		//List<Intent> intents=new List<Intent>();
-//		Map<String,Object> contextVariables = response.getContext();
-//		String action = "ACTION";
-//		if (contextVariables.containsKey(action) && contextVariables.get(action).toString() == "SearchWDS"){
-//			String searchTerm =contextVariables.get("SEARCH_TERM").toString();
-//			
-//			//fetching the method of searching in WDS
-//			Query queryObject = new Query();
-//			List<Document> results = queryObject.findQuery(searchTerm);
-//			Integer discoveryCount = new Integer(results.size());
-//			contextVariables.put(discoveryCount.toString(), "SEARCH_COUNT");
-//			//reseting the variable
-//			contextVariables.remove("ACTION");
-//			
-//			Map<String,Object> input =  parameters.getInput();
-//			input.put("text", "Search Results");
-//			parameters.setInput(input);
-//			wcsbuilder.context(parameters.getContext());
-//			newMessage = wcsbuilder.inputText("text: "+parameters.getInput().get("text").toString()).build();
-//			response = service.message(workspaceId, newMessage).execute();
-//			fetchingObjects.put("WDSResponse", results);
-//			fetchingObjects.put("WCSResponse", response);
-//		
-//		}else{
-//			fetchingObjects.put("WDSResponse", null);
-//			fetchingObjects.put("WCSResponse", response);
-//		}
-//		return fetchingObjects;
-//	}
 
 	public MessageRequest buildMessageFromPayload(InputStream body) {
 		StringBuilder sbuilder = null;
@@ -138,13 +90,14 @@ public class ConversationBrain {
 	          output = new HashMap<String, Object>();
 	          response.setOutput(output);
 	        }
-
+	        
 	        // Send the user's question to the discovery service
 	        List<Document> docs = new Query().findQuery(query);
-
+	        response.getContext().put("ACTION","SEARCH_RESULTS");
+	        response.getContext().put("SEARCH_COUNT",docs.size());
 	        // Append the discovery answers to the output object that will
 	        // be sent to the UI
-	        output.put("SEARCH_COUNT", docs);
+	        output.put("SearchResults", docs);
 	      }
 	    }
 
