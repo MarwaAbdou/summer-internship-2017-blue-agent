@@ -37,15 +37,15 @@
     	this.sendMessagesToRest = sendMessagesToRest;
     	
         function getResults(query,appController){
-			var results_var = $http.get('/blueagent-web/rest/services/discovery?query='+query);
-			results_var.success(function(data, status, headers, config){
-				appController.results = data;
-				appController.context.SEARCH_COUNT = data.length;
-				sendMessagesToRest("SearchResults",appController.context,appController);
-			});	
-			results_var.error(function(data, status, headers, config) {
-				alert( "failure message: " + JSON.stringify({data: data}));
-			});
+        	 var results_var = $http.get('/blueagent-web/rest/services/discovery?query='+query);
+        	 results_var.success(function(data, status, headers, config){
+        		 appController.results = data;
+        		 appController.context.SEARCH_COUNT = data.length;
+        		 sendMessagesToRest("SearchResults",appController.context,appController);
+        	 });	
+        	 results_var.error(function(data, status, headers, config) {
+     			alert( "failure message: " + JSON.stringify({data: data}));
+         	 });
         }
         
         function sendMessagesToRest(textInput, context,appController) {
