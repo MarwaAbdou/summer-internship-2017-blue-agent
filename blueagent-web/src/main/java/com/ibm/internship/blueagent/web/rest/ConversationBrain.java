@@ -68,38 +68,37 @@ public class ConversationBrain {
 	    // user's question or if we
 	    // should call the discovery service to obtain better answers
 
-	    if (response.getContext().containsKey("ACTION")
-	        && (response.getContext().get("ACTION").toString().indexOf("SearchWDS") != -1)) {
-	      String query = response.getContext().get("SEARCH_TERM").toString();
-
-	      // Extract the user's original query from the conversational
-	      // response
-	      if ((query != null) && !query.isEmpty()) {
-
-	        // For this app, both the original conversation response and the
-	        // discovery response
-	        // are sent to the UI. Extract and add the conversational
-	        // response to the ultimate response
-	        // we will send to the user. The UI will process this response
-	        // and show the top 3 retrieve
-	        // and rank answers to the user in the main UI. The JSON
-	        // response section of the UI will
-	        // show information from the calls to both services.
-	        Map<String, Object> output = response.getOutput();
-	        if (output == null) {
-	          output = new HashMap<String, Object>();
-	          response.setOutput(output);
-	        }
-	        
-	        // Send the user's question to the discovery service
-	        List<Document> docs = new Query().findQuery(query);
-	        response.getContext().put("ACTION","SEARCH_RESULTS");
-	        response.getContext().put("SEARCH_COUNT",docs.size());
-	        // Append the discovery answers to the output object that will
-	        // be sent to the UI
-	        output.put("SearchResults", docs);
-	      }
-	    }
+//	    if (response.getContext().containsKey("ACTION")
+//	        && (response.getContext().get("ACTION").toString().indexOf("SearchWDS") != -1)) {
+//	      String query = response.getContext().get("SEARCH_TERM").toString();
+//
+//	      // Extract the user's original query from the conversational
+//	      // response
+//	      if ((query != null) && !query.isEmpty()) {
+//
+//	        // For this app, both the original conversation response and the
+//	        // discovery response
+//	        // are sent to the UI. Extract and add the conversational
+//	        // response to the ultimate response
+//	        // we will send to the user. The UI will process this response
+//	        // and show the top 3 retrieve
+//	        // and rank answers to the user in the main UI. The JSON
+//	        // response section of the UI will
+//	        // show information from the calls to both services.
+//	        Map<String, Object> output = response.getOutput();
+//	        if (output == null) {
+//	          output = new HashMap<String, Object>();
+//	          response.setOutput(output);
+//	        }
+//	        
+//	        // Send the user's question to the discovery service
+//	        List<Document> docs = new Query().findQuery(query);
+//	        response.getContext().put("SEARCH_COUNT",docs.size());
+//	        // Append the discovery answers to the output object that will
+//	        // be sent to the UI
+//	        output.put("SearchResults", docs);
+//	      }
+//	    }
 
 	    return response;
 	}

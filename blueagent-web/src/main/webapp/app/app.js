@@ -11,24 +11,23 @@
 
     /* @ngInject */
     function AppController(MockMessagesService, $scope) {
-        var vm = this;
-        
-        vm.you = {
-            userId: '4562KDJYE72930DST283DFY202Dd',
-            avatar: 'http://www.freelanceweb16.fr/wp-content/uploads/2015/08/Woman_Avatar.gif',
-            userName: 'User'
-        };
-       MockMessagesService.sendMessagesToRest(null,null,vm);
-      
-       vm.sendMessage = function(message) {
-           MockMessagesService.sendMessagesToRest(message.text, vm.context,vm);
-       }
-       
-        $scope.results= MockMessagesService.getResults();
-        
-        $scope.$on('simple-chat-message-posted', function() {
-            console.log('onMessagePosted');
-        });
+		var vm = this;
+		
+		vm.you = {
+		    userId: '4562KDJYE72930DST283DFY202Dd',
+		    avatar: 'http://www.freelanceweb16.fr/wp-content/uploads/2015/08/Woman_Avatar.gif',
+		    userName: 'User'
+		    };
+		   MockMessagesService.sendMessagesToRest(null,null,vm);
+		  
+		   vm.sendMessage = function(message) {
+		       MockMessagesService.sendMessagesToRest(message.text, vm.context,vm);
+		   }
+		   
+		    
+		$scope.$on('simple-chat-message-posted', function() {
+			console.log('onMessagePosted');
+		});
         
     }
 
@@ -36,30 +35,22 @@
     function MockMessagesService($http) {
     	this.getResults = getResults;
     	this.sendMessagesToRest = sendMessagesToRest;
-        function getResults(){
-        	var results_array = [];
-        	var _tempObject = {
-        			query: "chatbot"
-        	},
-        	 results_var = $http.get('/blueagent-web/rest/services/discovery?query=chatbot', _tempObject);
-        	 results_var.success(function(data, status, headers, config){
-        		 for (var j = 0 ; j < data.length ; j++){
-        			 results_array.push(data[j]);
-        		 }
-        	 });	
-        	 results_var.error(function(data, status, headers, config) {
-     			alert( "failure message: " + JSON.stringify({data: data}));
-         	 });
-        	 
-//        	 console.log(results_array);
-        	 return results_array;
+    	
+        function getResults(query,appController){
+			var results_var = $http.get('/blueagent-web/rest/services/discovery?query='+query);
+			results_var.success(function(data, status, headers, config){
+				appController.results = data;
+				appController.context.SEARCH_COUNT = data.length;
+				sendMessagesToRest("SearchResults",appController.context,appController);
+			});	
+			results_var.error(function(data, status, headers, config) {
+				alert( "failure message: " + JSON.stringify({data: data}));
+			});
         }
         
         function sendMessagesToRest(textInput, context,appController) {
-        	console.log("textInput: ", textInput);
-        	var arrayOfObjects = [],
-        	arrayOfContext = [],        	
-            msg = {
+        	console.log("textInput: ", textInput);	
+            var msg = {
         			"input":{"text":textInput},
         			"context": context
         	},
@@ -82,6 +73,10 @@
     				}
     			}
     			appController.context = data.context;
+    			if (appController.context.ACTION == "SearchWDS"){
+    				appController.context.ACTION = "";
+    				getResults(appController.context.SEARCH_TERM,appController);
+    			}
         	});
         	
         	result.error(function(data, status, headers, config) {
