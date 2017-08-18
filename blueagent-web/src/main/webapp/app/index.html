@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app" style="padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:0px;background:rgba(232, 232, 232, 1);">
 
-<head >
-    <meta charset="UTF-8">
-    <link rel="icon" href="resources/logo.png">
-    <title>
-        Blue Agent
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- <link rel="stylesheet" href="../.tmp/styles/index.css"> -->
-    
-    <link rel="stylesheet" type="text/css" href="css/app.css">
-    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese">
-	<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto">
-	<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese">
-	<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext">
-    
-</head>
-
-<body ng-controller="AppController as AppView" style="overflow: hidden; ">
+	<head >
+	    <meta charset="UTF-8">
+	    <link rel="icon" href="resources/logo.png">
+	    <title>
+	        Blue Agent
+	    </title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	    <!-- <link rel="stylesheet" href="../.tmp/styles/index.css"> -->
+	    
+	    <link rel="stylesheet" type="text/css" href="css/app.css">
+	    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese">
+		<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese">
+		<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext">
+	    
+	</head>
 	
-	<h1 style="background-color:#515874; color:#00b0ff; text-align:left; border-bottom-width:1px; border-bottom-style:groove;font-family: 'Roboto', serif; font-size: 8pt;font-size: 75px;font-weight: 200;"> <span style="  color: #00b0ff;">Blue</span><span style="  color: #fff;">Agent</span></h1>
+	<body ng-controller="AppController as AppView" style="overflow: hidden; ">
+		
+		<h1 style="background-color:#515874; color:#00b0ff; text-align:left; border-bottom-width:1px; border-bottom-style:groove;font-family: 'Roboto', serif; font-size: 8pt;font-size: 75px;font-weight: 200;"> <span style="  color: #00b0ff;">Blue</span><span style="  color: #fff;">Agent</span></h1>
+		
+	    <div class="chat-container" > 
+	        <simple-chat
+	            messages="AppView.messages"
+	            local-user="AppView.you"
+	            send-function="AppView.sendMessage"
+	           	send-button-text="Send"
+	            show-user-avatar="true"
+	            show-composer="true"
+	            composer-placeholder-text="Write your message here"
+	            style="position: relative;"
+	        ></simple-chat>
+	    </div>
+	    
+	    <button class="w3-button w3-green w3-hover-white w3-hover-text-grey" onclick="document.getElementById('id01').style.display='block'" style=" color:#fff">View results</button>
 	
-    <div class="chat-container" > 
-        <simple-chat
-            messages="AppView.messages"
-            local-user="AppView.you"
-            send-function="AppView.sendMessage"
-           	another-send-function="AppView.wrapperFn"
-            send-button-text="Send"
-            show-user-avatar="true"
-            show-composer="true"
-            composer-placeholder-text="Write your message here"
-            style="position: relative;"
-        ></simple-chat>
-    </div>
-    
-    <button class="w3-button w3-green w3-hover-white w3-hover-text-grey" onclick="document.getElementById('id01').style.display='block'" style=" color:#fff">View results</button>
-
-	<div id="id01" class="w3-panel w3-display-container" style="display:none; background-color:#515874">
-  	<span onclick="this.parentElement.style.display='none'"
-  	class="w3-button w3-display0-topright w3-hover-text-white" style="background-color:#515874; color:#00b0ff">x</span>
-  	<p style="color:#fff">Bluemix suitable services:</p>
-	<ul>
-  <li ng-repeat="item in results" style="color:#fff">
-  {{item.title}}</li>
-</ul>
-	</div>
-    
+		<div id="id01" class="w3-panel w3-display-container" style="display:none; background-color:#515874">
+		  	<span onclick="this.parentElement.style.display='none'"
+		  	class="w3-button w3-display0-topright w3-hover-text-white" style="background-color:#515874; color:#00b0ff">x</span>
+		  	<p style="color:#fff">Bluemix suitable services:</p>
+			<ul>
+			  <li ng-repeat="item in results" style="color:#fff">
+			  	{{item.title}}
+			  </li>
+			</ul>
+		</div>
+	    
+		
+		 <!-- Dependencies -->
+	    <script src="resources/angular/angular.js"></script>
+	    <script src="resources/moment/moment.js"></script>
+	    <script src="resources/moment/locale/fr.js"></script>
+	    <!-- <script src="../.tmp/scripts/angular-simple-chat.js"></script>
+	    <script src="../.tmp/scripts/templates.js"></script> -->
+	    <script src="app.js"></script>
+	    
+	    <!--<script src="../bower_components/angular/angular.js"></script> -->
+	    <script src="resources/moment/moment.js"></script>
+	    <!-- <script src="../bower_components/angular-moment/angular-moment.js"></script> -->
 	
-	 <!-- Dependencies -->
-    <script src="resources/angular/angular.js"></script>
-    <script src="resources/moment/moment.js"></script>
-    <script src="resources/moment/locale/fr.js"></script>
-    <!-- <script src="../.tmp/scripts/angular-simple-chat.js"></script>
-    <script src="../.tmp/scripts/templates.js"></script> -->
-    <script src="app.js"></script>
-    
-    <!--<script src="../bower_components/angular/angular.js"></script> -->
-    <script src="resources/moment/moment.js"></script>
-    <!-- <script src="../bower_components/angular-moment/angular-moment.js"></script> -->
-
-    <!-- Simple Chat -->
-    <link rel="stylesheet" href="css/angular-simple-chat.min.css">
-    <script src="javascript/angular-simple-chat.min.js"></script>
-
-</body>
+	    <!-- Simple Chat -->
+	    <link rel="stylesheet" href="css/angular-simple-chat.min.css">
+	    <script src="javascript/angular-simple-chat.min.js"></script>
+	
+	</body>
 
 </html>
