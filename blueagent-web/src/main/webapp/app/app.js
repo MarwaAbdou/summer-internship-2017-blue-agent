@@ -36,6 +36,20 @@
     	this.getResults = getResults;
     	this.sendMessagesToRest = sendMessagesToRest;
     	
+    	function prepareSearchWithFilters(appController){
+       	  var enhancedQuery = appController.context.SEARCH_TERM;
+    	  if (appController.context.DATABASE_FILTER != null && appController.context.DATABASE_FILTER != ""){
+    		  enhancedQuery += " using "+ appController.context.DATABASE_FILTER;
+       	  } 
+    	  if (appController.context.IOT_FILTER != null && appController.context.IOT_FILTER != "" && appController.context.IOT_FILTER ){
+       		  enhancedQuery += " and IOT";
+       	  }
+    	  if (appController.context.WATSON_FILTER != null && appController.context.WATSON_FILTER != "" && appController.context.WATSON_FILTER ){
+       		enhancedQuery = "cognitive " + enhancedQuery;
+       	  }
+    	  return enhancedQuery;
+       }
+    	
         function getResults(query,appController){
         	 var results_var = $http.get('/blueagent-web/rest/services/discovery?query='+query);
         	 results_var.success(function(data, status, headers, config){
@@ -75,7 +89,7 @@
     			appController.context = data.context;
     			if (appController.context.ACTION == "SearchWDS"){
     				appController.context.ACTION = "";
-    				getResults(appController.context.SEARCH_TERM,appController);
+    				getResults(prepareSearchWithFilters(appController),appController);
     			}
         	});
         	
