@@ -21,7 +21,7 @@ public class ConversationBrain {
     private String password = "gNL1hmi5CWTF";
     private String url = "https://gateway.watsonplatform.net/conversation/api";
     private String username = "b70cdcad-91cd-4a6a-8089-98b24ce6d053";
-    private String workspaceId = "de7eb1fe-1140-4309-a2e3-c83636b1cf20";
+    private String workspaceId = "51915892-c414-4e62-9b33-6f6be65ebf87";
 
 	public MessageRequest buildMessageFromPayload(InputStream body) {
 		StringBuilder sbuilder = null;
