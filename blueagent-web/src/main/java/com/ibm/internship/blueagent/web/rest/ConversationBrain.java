@@ -35,7 +35,6 @@ public class ConversationBrain {
 	        str = reader.readLine();
 	        if (str != null) {
 	          sbuilder.append("\n");
-	          
 	        }
 	      }
 	      return GsonSingleton.getGson().fromJson(sbuilder.toString(), MessageRequest.class);
@@ -100,11 +99,7 @@ public class ConversationBrain {
 //	        output.put("SearchResults", docs);
 //	      }
 //	    }
-	    
-	    //sending the conversation response to class text to speech 
-	    BlueAgentTextToSpeech conversationResponse	=new BlueAgentTextToSpeech();
-	    conversationResponse.convertSpeech(response.getOutput().get("text").toString());
-	    
+
 	    return response;
 	}
 	
