@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" style="padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:0px;background:rgba(232, 232, 232, 1);">
+<html lang="en" ng-app="app" style=" padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:0px;background:rgba(232, 232, 232, 1);">
 
 	<head >
 	    <meta charset="UTF-8">
@@ -19,10 +19,24 @@
 	    
 	</head>
 	
-	<body ng-controller="AppController as AppView" style="overflow: hidden; ">
+	
+	<body ng-controller="AppController as AppView" style=" background-image:url(resources/bg.jpg.jpg);overflow: hidden; ">
 		
 		<h1 style="background-color:#515874; color:#00b0ff; text-align:left; border-bottom-width:1px; border-bottom-style:groove;font-family: 'Roboto', serif; font-size: 8pt;font-size: 75px;font-weight: 200;"> <span style="  color: #00b0ff;">Blue</span><span style="  color: #fff;">Agent</span></h1>
 		
+	<button class="w3-button w3-hover-white w3-hover-text-grey" onclick="document.getElementById('id01').style.display='block'" style=" background-color:#00b0ff; color:#fff">View results</button>
+	
+		<div id="id01" class="w3-panel w3-display-container" style="display:none; background-color:#515874">
+		  	<span onclick="this.parentElement.style.display='none'"
+		  	class="w3-button w3-display-topright w3-hover-text-white" style="background-color:#515874; color:#00b0ff">x</span>
+		  	<p style="color:#fff">Bluemix suitable services:</p>
+			<ul>
+			  <li ng-repeat="item in AppView.results" style="color:#fff">
+			  	{{item.title}}
+			  </li>
+			</ul>
+			</div>
+			
 	    <div class="chat-container" > 
 	        <simple-chat
 	            messages="AppView.messages"
@@ -36,17 +50,7 @@
 	        ></simple-chat>
 	    </div>
 	    
-	    <button class="w3-button w3-green w3-hover-white w3-hover-text-grey" onclick="document.getElementById('id01').style.display='block'" style=" color:#fff">View results</button>
-	
-		<div id="id01" class="w3-panel w3-display-container" style="display:none; background-color:#515874">
-		  	<span onclick="this.parentElement.style.display='none'"
-		  	class="w3-button w3-display0-topright w3-hover-text-white" style="background-color:#515874; color:#00b0ff">x</span>
-		  	<p style="color:#fff">Bluemix suitable services:</p>
-			<ul>
-			  <li ng-repeat="item in AppView.results" style="color:#fff">
-			  	{{item.title}}
-			  </li>
-			</ul>
+	    
 		</div>
 	    
 		
@@ -67,5 +71,22 @@
 	    <script src="javascript/angular-simple-chat.min.js"></script>
 	
 	</body>
+	
+
+<a href="#" id="myBtn" style="display:none; position: fixed; bottom:20px; right: 60px; z-index: 99; border:none; outline: none; cursor:pointer;padding15px; color:#515874; font-size:20px;">Go Up &#8657;</a>
+		
+	<script>
+			// When the user scrolls down 20px from the top of the document, show the button
+			window.onscroll = function() {scrollFunction()};
+
+			function scrollFunction() {
+    		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        		document.getElementById("myBtn").style.display = "block";
+    		} 
+    		else {
+        		document.getElementById("myBtn").style.display = "none";
+    		}
+			}
+	</script>
 
 </html>
